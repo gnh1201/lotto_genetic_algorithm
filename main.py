@@ -1,4 +1,4 @@
-# Lotto prediction with Genetic Algorithm and Mersenne Twister
+# Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
 # Go Namhyeon <gnh1201@gmail.com>
 # 2021-04-04
 # download excel data: https://dhlottery.co.kr/gameResult.do?method=byWin

@@ -44,8 +44,8 @@ model.run()
 solution = model.output_dict
 variable = model.output_dict['variable']
 
-_x = 958  # prediction
+_x = max([row[0] for row in rows]) + 1  # get highest number
 
-print ('Recommended numbers:')
+print ('Recommended numbers (' + str(_x) + 'th):')
 nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])
 print(', '.join(str(x) for x in nums))

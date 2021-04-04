@@ -36,7 +36,7 @@ def f(X):
 
     return -score
 
-varbound = np.array([[0, 100000]]*3)
+varbound = np.array([[0, 10000]]*3)
 
 model = ga(function=f, dimension=3, variable_type='int', variable_boundaries=varbound)
 model.run()
@@ -47,4 +47,5 @@ variable = model.output_dict['variable']
 _x = 958  # prediction
 
 print ('Recommended numbers:')
-print (', '.join(str(make_num(_x, n, variable[0], variable[1], variable[2], 1, 45)) for n in range(1, 7)))
+nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])
+print(', '.join(str(x) for x in nums))

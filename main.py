@@ -42,10 +42,19 @@ model = ga(function=f, dimension=3, variable_type='int', variable_boundaries=var
 model.run()
 
 solution = model.output_dict
-variable = model.output_dict['variable']
+_variables = model.output_dict['last_generation']['variables']
+variable = solution['variable']
+variables = [list(item) for item in set(tuple(x) for x in _variables)]
 
 _x = max([row[0] for row in rows]) + 1  # get highest number
 
-print ('Recommended numbers (' + str(_x) + 'th):')
+print()
+print ('Best matched numbers (' + str(_x) + 'th):')
 nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
 print(', '.join(str(x) for x in nums))
+
+print()
+print ('Recommended numbers (' + str(_x) + 'th):')
+for variable in variables:
+    nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
+    print(', '.join(str(x) for x in nums))

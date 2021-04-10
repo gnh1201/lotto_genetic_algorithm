@@ -9,7 +9,7 @@ from geneticalgorithm2 import geneticalgorithm2 as ga
 
 cols = [1, 13, 14, 15, 16, 17, 18, 19]  # included bonus number
 df = pd.read_excel('excel.xlsx', skiprows=2, usecols=cols, names=[0, 1, 2, 3, 4, 5, 6, 7])
-rows = df.values[:10]
+rows = df.values[:100]
 
 def make_num(x, n, a, b, c, min, max):
     seed = int(x*a + n*b + c)

@@ -15,7 +15,7 @@ def make_num(x, n, a, b, c, min, max):
     seed = int(x*a + n*b + c)
     rs = np.random.RandomState(np.random.MT19937())
     rs.seed(seed)
-    return min + round((max - min) * rs.random())
+    return min + round((max - min + 1) * rs.random())
 
 def f(X):
     score = 0
@@ -38,10 +38,15 @@ def f(X):
 
 varbound = np.array([[0, 10000]]*3)
 
-model = ga(function=f, dimension=3, variable_type='int', variable_boundaries=varbound)
+model = ga(function=f, dimension=3, variable_type='int', variable_boundaries=varbound, algorithm_parameters={
+    'max_num_iteration': 255
+})
 model.run()
 
 solution = model.output_dict
+
+print (solution)
+
 _variables = model.output_dict['last_generation']['variables']
 variable = solution['variable']
 variables = [list(item) for item in set(tuple(x) for x in _variables)]

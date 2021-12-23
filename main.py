@@ -31,8 +31,8 @@ def f(X):
             _num = make_num(x, n, X[0], X[1], X[2], _num, X[3], 1, 45)
             _N.append(_num)
         #_N = [make_num(x, n, X[0], X[1], X[2], 1, 45) for n in range(1, 8)]  # included bonus number
-        result = len(list(set(N[:-1]) & set(_N[:-1])))
-        if result > 5 or (result > 4 and _N[-1] in N):
+        result = len(list(set(N) & set(_N)))
+        if result > 5:
             score += 100
         elif result > 4:
             score += 75

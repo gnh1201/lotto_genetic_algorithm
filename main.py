@@ -1,6 +1,7 @@
 # Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
 # Go Namhyeon <gnh1201@gmail.com>
-# 2021-04-04
+# first created: 2021-04-04
+# last updated: 2021-12-23
 # download excel data: https://dhlottery.co.kr/gameResult.do?method=byWin
 
 import pandas as pd
@@ -11,8 +12,8 @@ cols = [1, 13, 14, 15, 16, 17, 18, 19]  # included bonus number
 df = pd.read_excel('excel.xlsx', skiprows=2, usecols=cols, names=[0, 1, 2, 3, 4, 5, 6, 7])
 rows = df.values[:100]
 
-def make_num(x, n, a, b, c, min, max):
-    seed = int(x*a + n*b + c)
+def make_num(x, n, a, b, c, d, e, min, max):
+    seed = int(x*a + n*b + c*d + e)
     rs = np.random.RandomState(np.random.MT19937())
     rs.seed(seed)
     return min + round((max - min + 1) * rs.random())
@@ -23,7 +24,13 @@ def f(X):
     for row in rows:
         x  = row[0]
         N = row[1:]
-        _N = [make_num(x, n, X[0], X[1], X[2], 1, 45) for n in range(1, 8)]  # included bonus number
+        
+        _N = []
+        _num = 0
+        for n in range(1, 8):  # included bonus number
+            _num = make_num(x, n, X[0], X[1], X[2], _num, X[3], 1, 45)
+            _N.append(_num)
+        #_N = [make_num(x, n, X[0], X[1], X[2], 1, 45) for n in range(1, 8)]  # included bonus number
         result = len(list(set(N) & set(_N)))
         if result > 5:
             score += 100
@@ -36,9 +43,9 @@ def f(X):
 
     return -score
 
-varbound = np.array([[0, 10000]]*3)
+varbound = np.array([[0, 10000]]*4)
 
-model = ga(function=f, dimension=3, variable_type='int', variable_boundaries=varbound, algorithm_parameters={
+model = ga(function=f, dimension=4, variable_type='int', variable_boundaries=varbound, algorithm_parameters={
     'max_num_iteration': 255
 })
 model.run()

@@ -62,11 +62,21 @@ _x = max([row[0] for row in rows]) + 1  # get highest number
 
 print()
 print ('Best matched numbers (' + str(_x) + 'th):')
-nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
+#nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
+nums = []
+_num = 0
+for n in range(1, 7):  # excluded bonus number
+    _num = make_num(x, n, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+    nums.append(_num)
 print(', '.join(str(x) for x in nums))
 
 print()
 print ('Recommended numbers (' + str(_x) + 'th):')
 for variable in variables:
-    nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
+    #nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
+    nums = []
+    _num = 0
+    for n in range(1, 7):  # excluded bonus number
+        _num = make_num(x, n, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+        nums.append(_num)
     print(', '.join(str(x) for x in nums))

@@ -1,9 +1,11 @@
 # Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
 # Go Namhyeon <gnh1201@gmail.com>
 # first created: 2021-04-04
-# last updated: 2021-12-23
+# last updated: 2021-12-31
 # download excel data: https://dhlottery.co.kr/gameResult.do?method=byWin
 
+import math
+import random
 import pandas as pd
 import numpy as np
 from geneticalgorithm2 import geneticalgorithm2 as ga
@@ -16,7 +18,7 @@ def make_num(x, n, a, b, c, d, e, min, max):
     seed = int(x*a + n*b + c*d + e)
     rs = np.random.RandomState(np.random.MT19937())
     rs.seed(seed)
-    return min + round((max - min + 1) * rs.random())
+    return min + math.floor((max - min) * rs.random())
 
 def f(X):
     score = 0
@@ -27,8 +29,12 @@ def f(X):
         
         _N = []
         _num = 0
+        k = 9
         for n in range(1, 8):  # included bonus number
             _num = make_num(x, n, X[0], X[1], X[2], _num, X[3], 1, 45)
+            while _num in _N:
+                _num = make_num(x, k, X[0], X[1], X[2], _num, X[3], 1, 45)
+                k += 1
             _N.append(_num)
         #_N = [make_num(x, n, X[0], X[1], X[2], 1, 45) for n in range(1, 8)]  # included bonus number
         result = len(list(set(N) & set(_N)))
@@ -56,7 +62,7 @@ print (solution)
 
 _variables = model.output_dict['last_generation']['variables']
 variable = solution['variable']
-variables = [list(item) for item in set(tuple(x) for x in _variables)]
+variables = random.sample([list(item) for item in set(tuple(x) for x in _variables)], 9)
 
 _x = max([row[0] for row in rows]) + 1  # get highest number
 
@@ -65,8 +71,12 @@ print ('Best matched numbers (' + str(_x) + 'th):')
 #nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
 nums = []
 _num = 0
+_k = 8
 for n in range(1, 7):  # excluded bonus number
     _num = make_num(_x, n, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+    while _num in nums:
+        _num = make_num(_x, _k, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+        _k += 1
     nums.append(_num)
 print(', '.join(str(x) for x in nums))
 
@@ -76,7 +86,11 @@ for variable in variables:
     #nums = sorted([make_num(_x, n, variable[0], variable[1], variable[2], 1, 45) for n in range(1, 7)])  # excluded bonus number
     nums = []
     _num = 0
+    _k = 8
     for n in range(1, 7):  # excluded bonus number
         _num = make_num(_x, n, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+        while _num in nums:
+            _num = make_num(_x, _k, variable[0], variable[1], variable[2], _num, variable[3], 1, 45)
+            _k += 1
         nums.append(_num)
     print(', '.join(str(x) for x in nums))

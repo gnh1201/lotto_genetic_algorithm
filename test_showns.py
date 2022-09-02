@@ -1,14 +1,13 @@
 # Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
 # Go Namhyeon <gnh1201@gmail.com>
 # first created: 2021-04-04
-# last updated: 2022-05-26
+# last updated: 2022-09-02
 # download excel data: https://dhlottery.co.kr/gameResult.do?method=byWin
 
 import math
 import random
 import pandas as pd
 import numpy as np
-from geneticalgorithm2 import geneticalgorithm2 as ga
 
 cols = [13, 14, 15, 16, 17, 18, 19]  # included bonus number
 df = pd.read_excel('excel.xlsx', skiprows=2, usecols=cols, names=[0, 1, 2, 3, 4, 5, 6])

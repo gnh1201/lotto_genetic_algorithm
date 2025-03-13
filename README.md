@@ -1,4 +1,6 @@
 # lotto_genetic_algorithm
+[![Discord chat](https://img.shields.io/discord/359930650330923008?logo=discord)](https://discord.gg/MA6TVxzwSb)
+
 Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
 
 ## Latest wins!

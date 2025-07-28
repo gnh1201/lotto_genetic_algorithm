@@ -14,7 +14,9 @@ Lotto prediction with Genetic Algorithm and Mersenne Twister (MT19937)
   * [Genetic algorithm](https://en.wikipedia.org/wiki/Genetic_algorithm)
 
 ## Report abuse
-- abuse@catswords.net
+- abuse@catswords.re.kr
+
+## Join our community
 - ActivityPub [@catswords_oss@catswords.social](https://catswords.social/@catswords_oss)
 - [Join Catswords OSS on Microsoft Teams](https://teams.live.com/l/community/FEACHncAhq8ldnojAI)
 - [Join Catswords OSS #lotto_genetic_algorithm on Discord](https://discord.gg/MA6TVxzwSb)
